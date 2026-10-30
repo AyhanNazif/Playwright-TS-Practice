@@ -78,21 +78,3 @@ test("E2E positive test with ordered two products", async ({pomManager}) => {
   await pomManager.mainAttributesPage.logoutButton.click();
   await expect(pomManager.homePage.page).toHaveURL("https://www.saucedemo.com/")
 })
-
-
-// test('has title', async ({ page }) => {
-//   await page.goto('https://playwright.dev/');
-
-//   // Expect a title "to contain" a substring.
-//   await expect(page).toHaveTitle(/Playwright/);
-// });
-
-// test('get started link', async ({ page }) => {
-//   await page.goto('https://playwright.dev/');
-
-//   // Click the get started link.
-//   await page.getByRole('link', { name: 'Get started' }).click();
-
-//   // Expects page to have a heading with the name of Installation.
-//   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-// });
