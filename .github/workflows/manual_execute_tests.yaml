@@ -1,10 +1,10 @@
-name: "Run tests manually"
+name: Run tests manually
 
 on:
   workflow_dispatch:
 
 jobs:
-  manual_test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
