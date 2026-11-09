@@ -1,4 +1,4 @@
-import { type Locator, type Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class HomePage {
 
@@ -18,11 +18,11 @@ export class HomePage {
         this.loginCredentials = page.locator("#login_credentials")
     }
 
-    public async Open(url: string) {
+    public async open(url: string) {
         await this.page.goto(url)
     }
 
-    public async Login(username: string, password: string) {
+    public async login(username: string, password: string) {
         await this.username.fill(username)
         await this.password.fill(password)
         await this.loginButton.click();

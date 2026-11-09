@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 
 export class CheckoutStepTwoPage {
 
@@ -20,13 +20,13 @@ export class CheckoutStepTwoPage {
         this.cancelButton = page.getByRole("button", {name:"Cancel"})
     }
 
-        private FindItemWithSelectedName(name:string): Locator {
+        private findItemWithSelectedName(name:string): Locator {
             return this.allProducts.locator(".cart_item", { hasText: name })
         }
     
-        public async FindProductFromCheckout(name:string, price:string, quantity:string) {
+        public async findProductFromCheckout(name:string, price:string, quantity:string) {
     
-            const product = this.FindItemWithSelectedName(name)
+            const product = this.findItemWithSelectedName(name)
     
             await expect(product.locator(".inventory_item_name")).toHaveText(name)
             await expect(product.locator(".inventory_item_price")).toHaveText(price)

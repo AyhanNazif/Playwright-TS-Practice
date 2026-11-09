@@ -1,4 +1,4 @@
-import { type Locator, type Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class CheckoutStepOnePage {
 
@@ -18,7 +18,8 @@ export class CheckoutStepOnePage {
         this.cancelButton = page.locator("#cancel")
     }
 
-    public async AddPersonalInformation(firstName: string, lastName:string, postCode: string) {
+    public async addPersonalInformation(firstName: string, lastName:string, postCode: string) {
+        await this.firstNameField.click()
         await this.firstNameField.fill(firstName)
         await this.lastNameField.fill(lastName)
         await this.postCodeField.fill(postCode)

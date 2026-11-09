@@ -4,34 +4,42 @@ export class InventoryPage {
 
     public readonly page: Page
     private readonly allProducts: Locator
+    private readonly productName: (parent: Locator) => Locator
+    private readonly productPrice: (parent: Locator) => Locator
+    private readonly addToCartButton: (parent: Locator) => Locator
+    private readonly removeFromCartButton: (parent: Locator) => Locator
 
     public constructor(page: Page) {
         this.page = page
         this.allProducts = page.locator(".inventory_list")
+        this.productName = (parent: Locator) => parent.locator(".inventory_item_name")
+        this.productPrice = (parent: Locator) => parent.locator(".inventory_item_price")
+        this.addToCartButton = (parent: Locator) => parent.getByRole("button", {name: "Add To Cart"})
+        this.removeFromCartButton = (parent: Locator) => parent.getByRole("button", {name:"Remove"})
     }
 
-    private FindItemWithSelectedName(name:string): Locator {
+    private findItemWithSelectedName(name:string): Locator {
         return this.allProducts.locator(".inventory_item", {hasText: name})
     }
 
-    public async FindProductFromCatalog(name: string, price: string) {
+    public async findProductFromCatalog(name: string, price: string) {
 
-        const product = this.FindItemWithSelectedName(name)
-        await expect(product.locator(".inventory_item_name")).toHaveText(name)
-        await expect(product.locator(".inventory_item_price")).toHaveText(price)
+        const product = this.findItemWithSelectedName(name)
+        await expect(this.productName(product)).toHaveText(name)
+        await expect(this.productPrice(product)).toHaveText(price)
     }
 
-    public async ProductAddToCart(name:string) {
+    public async productAddToCart(name:string) {
         
-        const product = this.FindItemWithSelectedName(name)
-        await expect(product.getByRole("button", {name: "Add To Cart"})).toBeEnabled()
-        await product.getByRole("button", {name: "Add To Cart"}).click()
+        const product = this.findItemWithSelectedName(name)
+        await expect(this.addToCartButton(product)).toBeEnabled()
+        await this.addToCartButton(product).click()
     }
 
-        public async ProductRemoveFromCart(name:string) {
+        public async productRemoveFromCart(name:string) {
         
-        const product = this.FindItemWithSelectedName(name)
-        await expect(product.getByRole("button", {name: "Remove"})).toBeEnabled()
-        await product.getByRole("button", {name: "Remove"}).click()
+        const product = this.findItemWithSelectedName(name)
+        await expect(this.removeFromCartButton(product)).toBeEnabled()
+        await this.removeFromCartButton(product).click()
     }
 }
