@@ -36,7 +36,7 @@ export class InventoryPage {
         await this.addToCartButton(product).click()
     }
 
-        public async productRemoveFromCart(name:string) {
+    public async productRemoveFromCart(name:string) {
         
         const product = this.findItemWithSelectedName(name)
         await expect(this.removeFromCartButton(product)).toBeEnabled()
