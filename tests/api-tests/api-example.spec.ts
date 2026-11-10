@@ -1,6 +1,6 @@
-import { test, expect } from './baseTest'
-import { GetUserResponse, GetAllUsersResponse } from '../api/models/UserInterface'
-import { GetAllProductsResponse, GetProductResponse } from '../api/models/ProductsInterface'
+import { test, expect } from '../baseTest'
+import { GetUserResponse, GetAllUsersResponse } from '../../api/models/UserInterface'
+import { GetAllProductsResponse, GetProductResponse } from '../../api/models/ProductsInterface'
 
 test.describe("Users api tests",() => {
 

@@ -1,5 +1,5 @@
-import { test, expect } from './baseTest'
-import { users } from "../dataTestConfig"
+import { test, expect } from '../baseTest'
+import { users } from "../../dataTestConfig"
 
 test("E2E positive test with ordered one product", async ({pomManager}) => {
 
