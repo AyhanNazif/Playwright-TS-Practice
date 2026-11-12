@@ -18,7 +18,7 @@ export class HomePage {
         this.loginCredentials = page.locator("#login_credentials")
     }
 
-    public async open(url: string) {
+    public async open(url: any) {
         await this.page.goto(url)
     }
 

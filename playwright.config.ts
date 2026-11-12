@@ -39,18 +39,40 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'api-tests',
+      testMatch: '**/api-tests/*.spec.ts',
+      use: {
+        baseURL: 'https://api.qaautomationlabs.com/v1/'
+      }
+    },
+
+    {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'],
+        launchOptions: {
+          args: [
+            '--hide-scrollbars'
+          ]
+        },
+        baseURL: "https://www.saucedemo.com"
+      },
+      testIgnore: '**/api-tests/*.spec.ts'
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: { ...devices['Desktop Firefox'],
+        baseURL: "https://www.saucedemo.com"
+      },
+      testIgnore: '**/api-tests/*.spec.ts'
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: { ...devices['Desktop Safari'],
+        baseURL: "https://www.saucedemo.com"
+       },
+      testIgnore: '**/api-tests/*.spec.ts'         
     },
 
     /* Test against mobile viewports. */

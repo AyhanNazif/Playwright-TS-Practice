@@ -11,12 +11,10 @@ type MyFixtures = {
     loggedIn: PomManager
 }
 
-const BaseUrl = "https://www.saucedemo.com"
-
 const test = base.extend<MyFixtures>({
-    pomManager: async ({page}, use) => {
+    pomManager: async ({page, baseURL}, use) => {
         const pomManage = new PomManager(page)
-        await pomManage.homePage.open(BaseUrl)
+        await pomManage.homePage.open(baseURL)
         await use(pomManage)
     },
     authenticationHolder: async ({request}, use) => {
@@ -28,9 +26,9 @@ const test = base.extend<MyFixtures>({
         const apiManage = new ApiManager(request, authenticationHolder)
         await use(apiManage)
     },
-    loggedIn: async({pomManager}, use) => {
+    loggedIn: async({pomManager, baseURL}, use) => {
         await pomManager.homePage.login(users.standard_user.username, users.standard_user.password)
-        await pomManager.homePage.page.waitForURL(BaseUrl + "/inventory.html")
+        await pomManager.homePage.page.waitForURL(baseURL + "/inventory.html")
         await use(pomManager)
     }
 })

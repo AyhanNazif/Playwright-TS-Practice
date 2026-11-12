@@ -8,6 +8,7 @@ export class MainAttributesPage {
     public readonly burgerMenu: Locator
     public readonly title: Locator
     public readonly logoutButton: Locator
+    public readonly selectOrderButton: Locator
 
     public constructor(page: Page) {
         this.page = page
@@ -16,5 +17,6 @@ export class MainAttributesPage {
         this.burgerMenu = page.locator("#react-burger-menu-btn")
         this.title = page.locator(".title");
         this.logoutButton = page.locator("#logout_sidebar_link")
+        this.selectOrderButton = page.locator(".product_sort_container")
     }
 }
