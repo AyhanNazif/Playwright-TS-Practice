@@ -3,9 +3,9 @@ import { Locator, Page } from "@playwright/test";
 export class CheckoutStepOnePage {
 
     public readonly page: Page
-    public readonly firstNameField: Locator
-    public readonly lastNameField: Locator
-    public readonly postCodeField: Locator
+    private readonly firstNameField: Locator
+    private readonly lastNameField: Locator
+    private readonly postCodeField: Locator
     public readonly continueButton: Locator
     public readonly cancelButton: Locator
 

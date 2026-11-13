@@ -40,6 +40,6 @@ export class CheckoutStepTwoPage {
     }
 
     public findCheckoutItemSize() {
-        return this.allProducts.locator(".cart_item")
+        return this.allProducts.locator(".cart_item").count()
     }
 }

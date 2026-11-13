@@ -4,9 +4,9 @@ export class HomePage {
 
     public readonly page: Page
     public readonly mainTitle : Locator
-    public readonly username: Locator
-    public readonly password: Locator
-    public readonly loginButton: Locator
+    private readonly username: Locator
+    private readonly password: Locator
+    private readonly loginButton: Locator
     public readonly loginCredentials: Locator
 
     public constructor(page: Page) {

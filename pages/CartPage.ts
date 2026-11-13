@@ -44,6 +44,6 @@ export class CartPage {
     }
 
     public findCartItemSize() {
-        return this.allProducts.locator(".cart_item")
+        return this.allProducts.locator(".cart_item").count()
     }
 }
