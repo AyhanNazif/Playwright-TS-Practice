@@ -6,6 +6,7 @@ import { CheckoutStepTwoPage } from "./CheckoutStepTwoPage"
 import { CheckoutCompletePage } from "./CheckoutCompletePage"
 import { MainAttributesPage } from "./MainAttributesPage"
 import { Page } from "@playwright/test";
+import { InventoryItemPage } from "./InventoryItemPage";
 
 export class PomManager {
 
@@ -18,6 +19,7 @@ export class PomManager {
     private _checkoutStepTwoPage?: CheckoutStepTwoPage
     private _checkoutCompletePage?: CheckoutCompletePage
     private _mainAttributesPage?: MainAttributesPage
+    private _inventoryItemPage?: InventoryItemPage
 
     public constructor(page: Page) {
         this.page = page
@@ -70,5 +72,12 @@ export class PomManager {
             this._mainAttributesPage = new MainAttributesPage(this.page)
         }
         return this._mainAttributesPage
+    }
+
+    public get inventoryItemPage(): InventoryItemPage{
+        if(!this._inventoryItemPage){
+            this._inventoryItemPage = new InventoryItemPage(this.page)
+        }
+        return this._inventoryItemPage
     }
 }

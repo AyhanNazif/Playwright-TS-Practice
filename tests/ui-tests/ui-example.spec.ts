@@ -1,5 +1,6 @@
 import { test, expect } from '../baseTest'
 import { users } from "../../dataTestConfig"
+import { log } from 'console'
 
 test("E2E positive test with ordered one product", async ({pomManager}) => {
 
@@ -220,6 +221,46 @@ test("Select 2 products, go to cart, delete all the products, click continue sho
   await expect(loggedIn.checkoutCompletePage.successfullyOrderMessage).toHaveText("Thank you for your order!")
   await loggedIn.mainAttributesPage.burgerMenu.click()
   await expect(loggedIn.mainAttributesPage.logoutButton).toBeVisible()
+  await loggedIn.mainAttributesPage.logoutButton.click()
+  await expect(loggedIn.homePage.page).toHaveURL("/")
+})
+
+test("Select 1 product from inventory item page, go to cart and order it", async ({loggedIn}) => {
+  
+  await expect(loggedIn.mainAttributesPage.title).toHaveText("Products")
+  await loggedIn.inventoryPage.findProductFromCatalog("Sauce Labs Bolt T-Shirt", "$15.99")
+  await loggedIn.inventoryPage.clickProductName("Sauce Labs Bolt T-Shirt")
+  await expect(loggedIn.inventoryItemPage.page).toHaveURL("/inventory-item.html?id=1")
+  await expect(loggedIn.inventoryItemPage.name).toHaveText("Sauce Labs Bolt T-Shirt")
+  await expect(loggedIn.inventoryItemPage.description).toHaveText("Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt.")
+  await expect(loggedIn.inventoryItemPage.price).toHaveText("$15.99")
+  await loggedIn.inventoryItemPage.addToCartButton.click()
+  await expect(loggedIn.mainAttributesPage.shoppingCartBadge).toHaveText("1")
+  await expect(loggedIn.inventoryItemPage.removeButton).toBeEnabled()
+  await loggedIn.inventoryItemPage.backToProductsButton.click()
+  await loggedIn.mainAttributesPage.shoppingCartButton.click()
+  await loggedIn.cartPage.page.waitForURL("/cart.html")
+  await expect(loggedIn.mainAttributesPage.title).toHaveText("Your Cart")
+  await loggedIn.cartPage.findProductFromCart("Sauce Labs Bolt T-Shirt", "$15.99", "1")
+  expect(await loggedIn.cartPage.findCartItemSize()).toBe(1)
+  await loggedIn.cartPage.checkoutButton.click()
+  await loggedIn.checkoutStepOnePage.page.waitForURL("/checkout-step-one.html")
+  await expect(loggedIn.mainAttributesPage.title).toHaveText("Checkout: Your Information")
+  await loggedIn.checkoutStepOnePage.addPersonalInformation("Ayhan","Nazif","7200")
+  await expect(loggedIn.checkoutStepOnePage.continueButton).toBeEnabled()
+  await loggedIn.checkoutStepOnePage.continueButton.click()
+  await loggedIn.checkoutStepTwoPage.page.waitForURL("/checkout-step-two.html")
+  await expect(loggedIn.mainAttributesPage.title).toHaveText("Checkout: Overview")
+  await loggedIn.checkoutStepTwoPage.findProductFromCheckout("Sauce Labs Bolt T-Shirt", "$15.99", "1")
+  expect(await loggedIn.checkoutStepTwoPage.findCheckoutItemSize()).toBe(1)
+  await expect(loggedIn.checkoutStepTwoPage.itemTotal).toHaveText("Item total: $15.99")
+  await expect(loggedIn.checkoutStepTwoPage.tax).toHaveText("Tax: $1.28")
+  await expect(loggedIn.checkoutStepTwoPage.totalSum).toHaveText("Total: $17.27")
+  await loggedIn.checkoutStepTwoPage.finishButton.click()
+  await loggedIn.checkoutCompletePage.page.waitForURL("/checkout-complete.html")
+  await expect(loggedIn.mainAttributesPage.title).toHaveText("Checkout: Complete!")
+  await expect(loggedIn.checkoutCompletePage.successfullyOrderMessage).toHaveText("Thank you for your order!")
+  await loggedIn.mainAttributesPage.burgerMenu.click()
   await loggedIn.mainAttributesPage.logoutButton.click()
   await expect(loggedIn.homePage.page).toHaveURL("/")
 })
