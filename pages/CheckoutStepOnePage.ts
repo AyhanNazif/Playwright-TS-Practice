@@ -8,6 +8,7 @@ export class CheckoutStepOnePage {
     private readonly postCodeField: Locator
     public readonly continueButton: Locator
     public readonly cancelButton: Locator
+    public readonly errorMsg: Locator
 
     public constructor(page: Page) {
         this.page = page
@@ -16,6 +17,7 @@ export class CheckoutStepOnePage {
         this.postCodeField = page.locator("#postal-code")
         this.continueButton = page.locator("#continue")
         this.cancelButton = page.locator("#cancel")
+        this.errorMsg = page.locator('[data-test="error"]')
     }
 
     public async addPersonalInformation(firstName: string, lastName:string, postCode: string) {
