@@ -44,7 +44,9 @@ export class InventoryPage {
     }
 
     public async clickProductName(name: string) {
+
         const product = this.findItemWithSelectedName(name)
+        await this.productName(product).isVisible()
         await this.productName(product).click()
     }
 }

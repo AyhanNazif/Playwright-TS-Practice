@@ -35,6 +35,11 @@ export default defineConfig({
       fullPage: true
     },
   },
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.05
+    }
+  },
 
   /* Configure projects for major browsers */
   projects: [

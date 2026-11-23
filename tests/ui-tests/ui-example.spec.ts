@@ -1,6 +1,5 @@
 import { test, expect } from '../baseTest'
 import { users,additionalInfo } from "../../dataTestConfig"
-import { log } from 'console'
 
 test("E2E positive test with ordered one product", async ({pomManager}) => {
 
@@ -34,7 +33,7 @@ test("E2E positive test with ordered one product", async ({pomManager}) => {
   await expect(pomManager.mainAttributesPage.title).toHaveText("Checkout: Complete!")
   await expect(pomManager.checkoutCompletePage.successfullyOrderMessage).toHaveText("Thank you for your order!")
   await pomManager.mainAttributesPage.burgerMenu.click()
-  await expect(pomManager.mainAttributesPage.logoutButton).toBeEnabled()
+  await expect(pomManager.mainAttributesPage.logoutButton).toBeInViewport()
   await pomManager.mainAttributesPage.logoutButton.click()
   await expect(pomManager.homePage.page).toHaveURL("/")
 })
@@ -75,7 +74,7 @@ test("E2E positive test with ordered two products", async ({pomManager}) => {
   await expect(pomManager.mainAttributesPage.title).toHaveText("Checkout: Complete!")
   await expect(pomManager.checkoutCompletePage.successfullyOrderMessage).toHaveText("Thank you for your order!")
   await pomManager.mainAttributesPage.burgerMenu.click()
-  await expect(pomManager.mainAttributesPage.logoutButton).toBeEnabled()
+  await expect(pomManager.mainAttributesPage.logoutButton).toBeInViewport()
   await pomManager.mainAttributesPage.logoutButton.click()
   await expect(pomManager.homePage.page).toHaveURL("/")
 })
@@ -118,7 +117,7 @@ test("Select two products but then delete one of them in cart page and finish th
   await expect(pomManager.mainAttributesPage.title).toHaveText("Checkout: Complete!")
   await expect(pomManager.checkoutCompletePage.successfullyOrderMessage).toHaveText("Thank you for your order!")
   await pomManager.mainAttributesPage.burgerMenu.click()
-  await expect(pomManager.mainAttributesPage.logoutButton).toBeEnabled()
+  await expect(pomManager.mainAttributesPage.logoutButton).toBeInViewport()
   await pomManager.mainAttributesPage.logoutButton.click()
   await expect(pomManager.homePage.page).toHaveURL("/")
 })
@@ -166,7 +165,7 @@ test("Select product, go to cart then click Continue Shopping, select second pro
   await expect(pomManager.mainAttributesPage.title).toHaveText("Checkout: Complete!")
   await expect(pomManager.checkoutCompletePage.successfullyOrderMessage).toHaveText("Thank you for your order!")
   await pomManager.mainAttributesPage.burgerMenu.click()
-  await expect(pomManager.mainAttributesPage.logoutButton).toBeEnabled()
+  await expect(pomManager.mainAttributesPage.logoutButton).toBeInViewport()
   await pomManager.mainAttributesPage.logoutButton.click()
   await expect(pomManager.homePage.page).toHaveURL("/")
 })
@@ -175,9 +174,9 @@ test("Select 2 products, go to cart, delete all the products, click continue sho
   
   await expect(loggedIn.mainAttributesPage.title).toHaveText("Products")
   await loggedIn.mainAttributesPage.selectOrderButton.selectOption("az")
-  await expect(loggedIn.inventoryPage.page).toHaveScreenshot("inventory_page.png", {fullPage:true, maxDiffPixelRatio: 0.05})    
+  await expect(loggedIn.inventoryPage.page).toHaveScreenshot("inventory_page.png", {fullPage:true})  
   await loggedIn.mainAttributesPage.selectOrderButton.selectOption("za")
-  await expect(loggedIn.inventoryPage.page).toHaveScreenshot("inventory_page_reversed.png", {fullPage:true, maxDiffPixelRatio: 0.05})
+  await expect(loggedIn.inventoryPage.page).toHaveScreenshot("inventory_page_reversed.png", {fullPage:true})
   await loggedIn.inventoryPage.findProductFromCatalog("Sauce Labs Backpack", "$29.99")
   await loggedIn.inventoryPage.findProductFromCatalog("Sauce Labs Bolt T-Shirt", "$15.99")
   await loggedIn.inventoryPage.productAddToCart("Sauce Labs Backpack")
@@ -220,7 +219,7 @@ test("Select 2 products, go to cart, delete all the products, click continue sho
   await expect(loggedIn.mainAttributesPage.title).toHaveText("Checkout: Complete!")
   await expect(loggedIn.checkoutCompletePage.successfullyOrderMessage).toHaveText("Thank you for your order!")
   await loggedIn.mainAttributesPage.burgerMenu.click()
-  await expect(loggedIn.mainAttributesPage.logoutButton).toBeEnabled()
+  await expect(loggedIn.mainAttributesPage.logoutButton).toBeInViewport()
   await loggedIn.mainAttributesPage.logoutButton.click()
   await expect(loggedIn.homePage.page).toHaveURL("/")
 })
@@ -261,6 +260,7 @@ test("Select 1 product from inventory item page, go to cart and order it", async
   await expect(loggedIn.mainAttributesPage.title).toHaveText("Checkout: Complete!")
   await expect(loggedIn.checkoutCompletePage.successfullyOrderMessage).toHaveText("Thank you for your order!")
   await loggedIn.mainAttributesPage.burgerMenu.click()
+  await expect(loggedIn.mainAttributesPage.logoutButton).toBeInViewport()
   await loggedIn.mainAttributesPage.logoutButton.click()
   await expect(loggedIn.homePage.page).toHaveURL("/")
 })
